@@ -1,0 +1,54 @@
+{
+  "title": "Human–LLM Agents Simulation: code and data for \"Large language models struggle to simulate human belief updates in controlled environments\"",
+  "upload_type": "software",
+  "description": "<p>Code and data accompanying the paper <em>Large language models struggle to simulate human belief updates in controlled environments</em> (Pohl et al., 2026, arXiv:2607.28347).</p><p>LLMs are increasingly used as stand-ins for human study participants, but whether they can faithfully reproduce individual human behavior is rarely tested directly. This study compares the belief updates of 391 UK participants recruited via Prolific, who reported their stances on three discussion topics (universal basic income, penalty shootouts, and weight-loss medication) before and after reading Reddit comments, against simulations of the same participants by six LLMs. When given participants' actual initial stances, most models simulate post-stances without systematic directional bias, though individual-level errors vary widely between models. No model reproduces the initial stances themselves or faithful updates from self-generated stances, and all models overrepresent neutral positions, predict more frequent but smaller belief shifts than humans show, and fail to rank comments by how convincing participants found them.</p><p>This repository contains the human-subjects and LLM simulation data, the persona construction (demographics, Big Five personality traits, and initial stance), the code for running the LLM simulations, and the analysis comparing simulated and human belief updates.</p>",
+  "creators": [
+    {
+      "name": "Pohl, Sebastian",
+      "affiliation": "IT:U Interdisciplinary Transformation University Austria"
+    },
+    {
+      "name": "Mehta, Harsh"
+    },
+    {
+      "name": "Mambayil, Pranav"
+    },
+    {
+      "name": "Ghafoor, Abdul"
+    },
+    {
+      "name": "Lesigang, Franziska"
+    },
+    {
+      "name": "Hou, Yufang",
+      "affiliation": "IT:U Interdisciplinary Transformation University Austria"
+    },
+    {
+      "name": "Hilbe, Christian"
+    }
+  ],
+  "keywords": [
+    "large language models",
+    "LLM agents",
+    "belief updating",
+    "human behavior simulation",
+    "opinion dynamics",
+    "persuasion",
+    "simulation drift"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.48550/arXiv.2607.28347",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://arxiv.org/abs/2607.28347",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-preprint",
+      "scheme": "url"
+    }
+  ],
+  "language": "eng"
+}

@@ -17,7 +17,7 @@ If you use this code or data, please cite:
 
 ```bibtex
 @misc{pohl2026llmsstruggle,
-  title         = {LLMs struggle to simulate human belief updates in controlled environments},
+  title         = {Large language models struggle to simulate human belief updates in controlled environments},
   author        = {Sebastian Pohl and Harsh Mehta and Pranav Mambayil and Abdul Ghafoor and Franziska Lesigang and Yufang Hou and Christian Hilbe},
   year          = {2026},
   eprint        = {2607.28347},
