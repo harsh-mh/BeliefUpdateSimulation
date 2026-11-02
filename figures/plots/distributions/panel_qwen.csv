@@ -1,0 +1,6 @@
+model,likert_value,likert_label,model_post_stance_count,human_post_stance_count
+Qwen3-32B,-2,SD,141,183
+Qwen3-32B,-1,D,297,298
+Qwen3-32B,0,N,287,181
+Qwen3-32B,1,A,341,317
+Qwen3-32B,2,SA,107,194

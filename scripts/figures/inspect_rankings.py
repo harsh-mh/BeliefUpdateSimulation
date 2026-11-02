@@ -287,18 +287,35 @@ def get_extreme_comments_by_source(df):
     print("Written to rankings/extreme_comments.txt")
 
 
-def plot_avg_comment_rankings(df):
-    # Order: Models first, then Human
+def avg_comment_rank_table(df):
+    """Mean rank of every comment (topic, package, source message) per source.
+
+    One row per comment, one column per source (models first, then Human).
+    Each source column is the set of values behind that source's box.
+    """
     slugs = [slug for _, slug, _ in MODELS.values()] + ['human']
-    colors = [color for _, _, color in MODELS.values()] + [HUMAN_COLOR]
+    labels = list(MODELS.keys()) + ['Human']
 
     rank_cols = [f'message_{i}_{s}_rank' for s in slugs for i in (1, 2, 3)]
     mean_df = df.groupby(['topic', 'package'])[rank_cols].mean()
 
-    distributions = [
-        mean_df[[f'message_1_{s}_rank', f'message_2_{s}_rank', f'message_3_{s}_rank']].values.flatten()
-        for s in slugs
-    ]
+    rows = []
+    for (topic, package), r in mean_df.iterrows():
+        for msg_id in (1, 2, 3):
+            row = {'topic': topic, 'package': package, 'source_message_id': msg_id}
+            for label, s in zip(labels, slugs):
+                row[label] = r[f'message_{msg_id}_{s}_rank']
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def plot_avg_comment_rankings(df):
+    # Order: Models first, then Human
+    labels = list(MODELS.keys()) + ['Human']
+    colors = [color for _, _, color in MODELS.values()] + [HUMAN_COLOR]
+
+    table = avg_comment_rank_table(df)
+    distributions = [table[label].values for label in labels]
 
     # Sized so the rankings panel's outer aspect (h/w â‰ˆ 0.44) is half the human
     # panel's outer aspect (h/w â‰ˆ 0.86 from figsize 3.2Ã—2.8). When the combined
@@ -316,7 +333,7 @@ def plot_avg_comment_rankings(df):
 
     # X-axis: hide tick labels (model identity comes from the master legend in the
     # combined figure). Keep the bottom spine and tick marks intact.
-    ax.set_xticks(range(1, len(slugs) + 1))
+    ax.set_xticks(range(1, len(labels) + 1))
     ax.set_xticklabels([])
     ax.set_ylabel('Mean rank', fontsize=14)
     ax.spines[['top', 'right']].set_visible(False)
@@ -342,7 +359,8 @@ def plot_avg_comment_rankings(df):
     fig.savefig('figures/rankings/plot_avg_comment_rankings.pdf')
     fig.savefig('figures/rankings/plot_avg_comment_rankings.svg', format='svg')
     plt.close(fig)
-    print("Written to rankings/plot_avg_comment_rankings.png / .pdf / .svg")
+    table.to_csv('figures/rankings/plot_avg_comment_rankings.csv', index=False)
+    print("Written to rankings/plot_avg_comment_rankings.png / .pdf / .svg / .csv")
 
 
 def print_sorted_mean_ranks(df):
@@ -385,20 +403,25 @@ def print_sorted_mean_ranks(df):
             sep_idx += 1
 
 
-df = load_ranking_data()
-data = get_average_message_ranks(df, print_output=True)
-analyse_rankings(data)
-get_extreme_comments_by_source(df)
-plot_avg_comment_rankings(df)
-print_sorted_mean_ranks(df)
+def main():
+    df = load_ranking_data()
+    data = get_average_message_ranks(df, print_output=True)
+    analyse_rankings(data)
+    get_extreme_comments_by_source(df)
+    plot_avg_comment_rankings(df)
+    print_sorted_mean_ranks(df)
 
-# Sanity check: grand mean rank should be ~2 for all sources if design is balanced
-print("\n--- Grand mean rank and observation count per source ---")
-print(f"  {'Source':30s}  {'mean':>8}  {'n obs':>8}")
-# Order: Models first, then Human
-slugs = [slug for _, slug, _ in MODELS.values()] + ['human']
-labels = list(MODELS.keys()) + ['Human']
-for label, slug in zip(labels, slugs):
-    cols = [f'message_{i}_{slug}_rank' for i in (1, 2, 3)]
-    series = df[cols].stack()
-    print(f"  {label:30s}  mean={series.mean():.4f}  n={len(series):6d}")
+    # Sanity check: grand mean rank should be ~2 for all sources if design is balanced
+    print("\n--- Grand mean rank and observation count per source ---")
+    print(f"  {'Source':30s}  {'mean':>8}  {'n obs':>8}")
+    # Order: Models first, then Human
+    slugs = [slug for _, slug, _ in MODELS.values()] + ['human']
+    labels = list(MODELS.keys()) + ['Human']
+    for label, slug in zip(labels, slugs):
+        cols = [f'message_{i}_{slug}_rank' for i in (1, 2, 3)]
+        series = df[cols].stack()
+        print(f"  {label:30s}  mean={series.mean():.4f}  n={len(series):6d}")
+
+
+if __name__ == "__main__":
+    main()

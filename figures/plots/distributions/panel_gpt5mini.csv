@@ -1,0 +1,6 @@
+model,likert_value,likert_label,model_post_stance_count,human_post_stance_count
+GPT-5-mini,-2,SD,211,183
+GPT-5-mini,-1,D,220,298
+GPT-5-mini,0,N,241,181
+GPT-5-mini,1,A,332,317
+GPT-5-mini,2,SA,169,194

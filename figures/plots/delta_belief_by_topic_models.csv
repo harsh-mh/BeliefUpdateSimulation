@@ -1,0 +1,190 @@
+topic,topic_label,source,delta,count,proportion
+UBI,UBI,Human,-4,6,0.015345268542199489
+UBI,UBI,Human,-3,12,0.030690537084398978
+UBI,UBI,Human,-2,41,0.10485933503836317
+UBI,UBI,Human,-1,67,0.17135549872122763
+UBI,UBI,Human,0,234,0.59846547314578
+UBI,UBI,Human,1,19,0.04859335038363171
+UBI,UBI,Human,2,5,0.01278772378516624
+UBI,UBI,Human,3,3,0.0076726342710997444
+UBI,UBI,Human,4,4,0.010230179028132993
+UBI,UBI,GPT-5.2,-4,0,0.0
+UBI,UBI,GPT-5.2,-3,0,0.0
+UBI,UBI,GPT-5.2,-2,0,0.0
+UBI,UBI,GPT-5.2,-1,251,0.6419437340153452
+UBI,UBI,GPT-5.2,0,133,0.340153452685422
+UBI,UBI,GPT-5.2,1,7,0.017902813299232736
+UBI,UBI,GPT-5.2,2,0,0.0
+UBI,UBI,GPT-5.2,3,0,0.0
+UBI,UBI,GPT-5.2,4,0,0.0
+UBI,UBI,GPT-5-Mini,-4,0,0.0
+UBI,UBI,GPT-5-Mini,-3,0,0.0
+UBI,UBI,GPT-5-Mini,-2,4,0.010230179028132993
+UBI,UBI,GPT-5-Mini,-1,262,0.670076726342711
+UBI,UBI,GPT-5-Mini,0,79,0.2020460358056266
+UBI,UBI,GPT-5-Mini,1,46,0.11764705882352941
+UBI,UBI,GPT-5-Mini,2,0,0.0
+UBI,UBI,GPT-5-Mini,3,0,0.0
+UBI,UBI,GPT-5-Mini,4,0,0.0
+UBI,UBI,Claude-Opus-4.6,-4,0,0.0
+UBI,UBI,Claude-Opus-4.6,-3,0,0.0
+UBI,UBI,Claude-Opus-4.6,-2,0,0.0
+UBI,UBI,Claude-Opus-4.6,-1,163,0.41687979539641945
+UBI,UBI,Claude-Opus-4.6,0,192,0.49104859335038364
+UBI,UBI,Claude-Opus-4.6,1,36,0.09207161125319693
+UBI,UBI,Claude-Opus-4.6,2,0,0.0
+UBI,UBI,Claude-Opus-4.6,3,0,0.0
+UBI,UBI,Claude-Opus-4.6,4,0,0.0
+UBI,UBI,Gemini-3-Flash-Preview,-4,0,0.0
+UBI,UBI,Gemini-3-Flash-Preview,-3,0,0.0
+UBI,UBI,Gemini-3-Flash-Preview,-2,0,0.0
+UBI,UBI,Gemini-3-Flash-Preview,-1,131,0.3350383631713555
+UBI,UBI,Gemini-3-Flash-Preview,0,251,0.6419437340153452
+UBI,UBI,Gemini-3-Flash-Preview,1,9,0.023017902813299233
+UBI,UBI,Gemini-3-Flash-Preview,2,0,0.0
+UBI,UBI,Gemini-3-Flash-Preview,3,0,0.0
+UBI,UBI,Gemini-3-Flash-Preview,4,0,0.0
+UBI,UBI,Qwen3-32B,-4,0,0.0
+UBI,UBI,Qwen3-32B,-3,0,0.0
+UBI,UBI,Qwen3-32B,-2,10,0.02557544757033248
+UBI,UBI,Qwen3-32B,-1,225,0.5754475703324808
+UBI,UBI,Qwen3-32B,0,125,0.319693094629156
+UBI,UBI,Qwen3-32B,1,30,0.07672634271099744
+UBI,UBI,Qwen3-32B,2,1,0.0025575447570332483
+UBI,UBI,Qwen3-32B,3,0,0.0
+UBI,UBI,Qwen3-32B,4,0,0.0
+UBI,UBI,Llama-3.3-70B-Instruct,-4,0,0.0
+UBI,UBI,Llama-3.3-70B-Instruct,-3,0,0.0
+UBI,UBI,Llama-3.3-70B-Instruct,-2,15,0.03836317135549872
+UBI,UBI,Llama-3.3-70B-Instruct,-1,187,0.4782608695652174
+UBI,UBI,Llama-3.3-70B-Instruct,0,119,0.30434782608695654
+UBI,UBI,Llama-3.3-70B-Instruct,1,69,0.17647058823529413
+UBI,UBI,Llama-3.3-70B-Instruct,2,1,0.0025575447570332483
+UBI,UBI,Llama-3.3-70B-Instruct,3,0,0.0
+UBI,UBI,Llama-3.3-70B-Instruct,4,0,0.0
+penalty,Penalty Shootouts,Human,-4,6,0.015345268542199489
+penalty,Penalty Shootouts,Human,-3,2,0.005115089514066497
+penalty,Penalty Shootouts,Human,-2,14,0.03580562659846547
+penalty,Penalty Shootouts,Human,-1,28,0.07161125319693094
+penalty,Penalty Shootouts,Human,0,256,0.6547314578005116
+penalty,Penalty Shootouts,Human,1,57,0.14578005115089515
+penalty,Penalty Shootouts,Human,2,19,0.04859335038363171
+penalty,Penalty Shootouts,Human,3,6,0.015345268542199489
+penalty,Penalty Shootouts,Human,4,3,0.0076726342710997444
+penalty,Penalty Shootouts,GPT-5.2,-4,1,0.0025575447570332483
+penalty,Penalty Shootouts,GPT-5.2,-3,0,0.0
+penalty,Penalty Shootouts,GPT-5.2,-2,0,0.0
+penalty,Penalty Shootouts,GPT-5.2,-1,150,0.3836317135549872
+penalty,Penalty Shootouts,GPT-5.2,0,134,0.34271099744245526
+penalty,Penalty Shootouts,GPT-5.2,1,106,0.2710997442455243
+penalty,Penalty Shootouts,GPT-5.2,2,0,0.0
+penalty,Penalty Shootouts,GPT-5.2,3,0,0.0
+penalty,Penalty Shootouts,GPT-5.2,4,0,0.0
+penalty,Penalty Shootouts,GPT-5-Mini,-4,0,0.0
+penalty,Penalty Shootouts,GPT-5-Mini,-3,0,0.0
+penalty,Penalty Shootouts,GPT-5-Mini,-2,0,0.0
+penalty,Penalty Shootouts,GPT-5-Mini,-1,136,0.34782608695652173
+penalty,Penalty Shootouts,GPT-5-Mini,0,109,0.27877237851662406
+penalty,Penalty Shootouts,GPT-5-Mini,1,146,0.3734015345268542
+penalty,Penalty Shootouts,GPT-5-Mini,2,0,0.0
+penalty,Penalty Shootouts,GPT-5-Mini,3,0,0.0
+penalty,Penalty Shootouts,GPT-5-Mini,4,0,0.0
+penalty,Penalty Shootouts,Claude-Opus-4.6,-4,0,0.0
+penalty,Penalty Shootouts,Claude-Opus-4.6,-3,0,0.0
+penalty,Penalty Shootouts,Claude-Opus-4.6,-2,0,0.0
+penalty,Penalty Shootouts,Claude-Opus-4.6,-1,126,0.32225063938618925
+penalty,Penalty Shootouts,Claude-Opus-4.6,0,159,0.40664961636828645
+penalty,Penalty Shootouts,Claude-Opus-4.6,1,106,0.2710997442455243
+penalty,Penalty Shootouts,Claude-Opus-4.6,2,0,0.0
+penalty,Penalty Shootouts,Claude-Opus-4.6,3,0,0.0
+penalty,Penalty Shootouts,Claude-Opus-4.6,4,0,0.0
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,-4,0,0.0
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,-3,0,0.0
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,-2,0,0.0
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,-1,97,0.24808184143222506
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,0,188,0.48081841432225064
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,1,106,0.2710997442455243
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,2,0,0.0
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,3,0,0.0
+penalty,Penalty Shootouts,Gemini-3-Flash-Preview,4,0,0.0
+penalty,Penalty Shootouts,Qwen3-32B,-4,0,0.0
+penalty,Penalty Shootouts,Qwen3-32B,-3,0,0.0
+penalty,Penalty Shootouts,Qwen3-32B,-2,4,0.010230179028132993
+penalty,Penalty Shootouts,Qwen3-32B,-1,119,0.30434782608695654
+penalty,Penalty Shootouts,Qwen3-32B,0,141,0.36061381074168797
+penalty,Penalty Shootouts,Qwen3-32B,1,127,0.3248081841432225
+penalty,Penalty Shootouts,Qwen3-32B,2,0,0.0
+penalty,Penalty Shootouts,Qwen3-32B,3,0,0.0
+penalty,Penalty Shootouts,Qwen3-32B,4,0,0.0
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,-4,0,0.0
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,-3,1,0.0025575447570332483
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,-2,20,0.05115089514066496
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,-1,194,0.4961636828644501
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,0,56,0.1432225063938619
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,1,103,0.26342710997442453
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,2,16,0.04092071611253197
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,3,1,0.0025575447570332483
+penalty,Penalty Shootouts,Llama-3.3-70B-Instruct,4,0,0.0
+weight_loss,Weight Loss Drugs,Human,-4,0,0.0
+weight_loss,Weight Loss Drugs,Human,-3,2,0.005115089514066497
+weight_loss,Weight Loss Drugs,Human,-2,15,0.03836317135549872
+weight_loss,Weight Loss Drugs,Human,-1,47,0.12020460358056266
+weight_loss,Weight Loss Drugs,Human,0,277,0.7084398976982097
+weight_loss,Weight Loss Drugs,Human,1,42,0.10741687979539642
+weight_loss,Weight Loss Drugs,Human,2,5,0.01278772378516624
+weight_loss,Weight Loss Drugs,Human,3,3,0.0076726342710997444
+weight_loss,Weight Loss Drugs,Human,4,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5.2,-4,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5.2,-3,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5.2,-2,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5.2,-1,86,0.21994884910485935
+weight_loss,Weight Loss Drugs,GPT-5.2,0,150,0.3836317135549872
+weight_loss,Weight Loss Drugs,GPT-5.2,1,155,0.39641943734015345
+weight_loss,Weight Loss Drugs,GPT-5.2,2,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5.2,3,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5.2,4,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5-Mini,-4,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5-Mini,-3,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5-Mini,-2,6,0.015345268542199489
+weight_loss,Weight Loss Drugs,GPT-5-Mini,-1,118,0.30179028132992325
+weight_loss,Weight Loss Drugs,GPT-5-Mini,0,74,0.18925831202046037
+weight_loss,Weight Loss Drugs,GPT-5-Mini,1,193,0.4936061381074169
+weight_loss,Weight Loss Drugs,GPT-5-Mini,2,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5-Mini,3,0,0.0
+weight_loss,Weight Loss Drugs,GPT-5-Mini,4,0,0.0
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,-4,0,0.0
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,-3,0,0.0
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,-2,0,0.0
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,-1,72,0.18414322250639387
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,0,170,0.43478260869565216
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,1,149,0.38107416879795397
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,2,0,0.0
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,3,0,0.0
+weight_loss,Weight Loss Drugs,Claude-Opus-4.6,4,0,0.0
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,-4,0,0.0
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,-3,0,0.0
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,-2,0,0.0
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,-1,73,0.18717948717948718
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,0,245,0.6282051282051282
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,1,72,0.18461538461538463
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,2,0,0.0
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,3,0,0.0
+weight_loss,Weight Loss Drugs,Gemini-3-Flash-Preview,4,0,0.0
+weight_loss,Weight Loss Drugs,Qwen3-32B,-4,0,0.0
+weight_loss,Weight Loss Drugs,Qwen3-32B,-3,0,0.0
+weight_loss,Weight Loss Drugs,Qwen3-32B,-2,1,0.0025575447570332483
+weight_loss,Weight Loss Drugs,Qwen3-32B,-1,99,0.2531969309462916
+weight_loss,Weight Loss Drugs,Qwen3-32B,0,184,0.47058823529411764
+weight_loss,Weight Loss Drugs,Qwen3-32B,1,103,0.26342710997442453
+weight_loss,Weight Loss Drugs,Qwen3-32B,2,4,0.010230179028132993
+weight_loss,Weight Loss Drugs,Qwen3-32B,3,0,0.0
+weight_loss,Weight Loss Drugs,Qwen3-32B,4,0,0.0
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,-4,0,0.0
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,-3,4,0.010230179028132993
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,-2,19,0.04859335038363171
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,-1,145,0.37084398976982097
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,0,65,0.16624040920716113
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,1,153,0.391304347826087
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,2,5,0.01278772378516624
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,3,0,0.0
+weight_loss,Weight Loss Drugs,Llama-3.3-70B-Instruct,4,0,0.0

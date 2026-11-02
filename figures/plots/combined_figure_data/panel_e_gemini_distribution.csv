@@ -1,0 +1,6 @@
+model,likert_value,likert_label,model_post_stance_count,human_post_stance_count
+Gemini-3-flash,-2,SD,176,183
+Gemini-3-flash,-1,D,323,298
+Gemini-3-flash,0,N,106,181
+Gemini-3-flash,1,A,394,317
+Gemini-3-flash,2,SA,173,194

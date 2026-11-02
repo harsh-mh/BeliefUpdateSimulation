@@ -1,0 +1,6 @@
+model,likert_value,likert_label,model_post_stance_count,human_post_stance_count
+GPT-5.2,-2,SD,115,183
+GPT-5.2,-1,D,305,298
+GPT-5.2,0,N,353,181
+GPT-5.2,1,A,309,317
+GPT-5.2,2,SA,91,194

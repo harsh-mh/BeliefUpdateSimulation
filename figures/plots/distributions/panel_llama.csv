@@ -1,0 +1,6 @@
+model,likert_value,likert_label,model_post_stance_count,human_post_stance_count
+Llama-3.3-70B-Instruct,-2,SD,163,183
+Llama-3.3-70B-Instruct,-1,D,312,298
+Llama-3.3-70B-Instruct,0,N,252,181
+Llama-3.3-70B-Instruct,1,A,352,317
+Llama-3.3-70B-Instruct,2,SA,94,194

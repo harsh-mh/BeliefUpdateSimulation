@@ -12,5 +12,26 @@
     "Observed Diff":0.0826939471,
     "p-value":0.00809,
     "Reject Null":true
+  },
+  {
+    "LLM":"Qwen3_32B",
+    "Condition":"no-personality",
+    "Observed Diff":0.0596760443,
+    "p-value":0.061078,
+    "Reject Null":false
+  },
+  {
+    "LLM":"Qwen3_32B",
+    "Condition":"no-persona",
+    "Observed Diff":0.073316283,
+    "p-value":0.02311,
+    "Reject Null":false
+  },
+  {
+    "LLM":"Qwen3_32B",
+    "Condition":"no-reason",
+    "Observed Diff":0.0784313725,
+    "p-value":0.013717,
+    "Reject Null":true
   }
 ]

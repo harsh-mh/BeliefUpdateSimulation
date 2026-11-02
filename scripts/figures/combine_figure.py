@@ -22,6 +22,7 @@ import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
 from PIL import Image
 import io
+from scripts.figures.combined_figure_data import collect_panel_csvs, write_figure_csv
 
 # Set consistent font sizes
 plt.rcParams.update({
@@ -323,6 +324,16 @@ print(f"Saved {out_pdf}")
 out_png = f"{output_dir}/combined_figure.png"
 fig.savefig(out_png, dpi=300, bbox_inches="tight", pad_inches=0.05)
 print(f"Saved {out_png}")
+
+# Source data for each panel (a-i), one csv per panel
+data_dir = f"{output_dir}/combined_figure_data"
+for path in collect_panel_csvs(data_dir):
+    print(f"Saved {path}")
+
+# All panels in one long-format csv (one row per plotted number)
+out_csv = f"{output_dir}/combined_figure_data.csv"
+write_figure_csv(out_csv, data_dir)
+print(f"Saved {out_csv}")
 
 print(f"\nFigure dimensions: {fig.get_size_inches()} inches")
 print("Layout: 4 rows Ã— 3 columns")

@@ -45,9 +45,24 @@ LIKERT_VALUES = [-2, -1, 0, 1, 2]
 LIKERT_LABELS = ["SD", "D", "N", "A", "SA"]  # SD=Strongly Disagree, D=Disagree, N=Neutral, A=Agree, SA=Strongly Agree
 
 
+def likert_counts(series):
+    """Count responses per Likert value, ignoring missing / non-numeric entries."""
+    s = pd.to_numeric(series, errors="coerce").dropna().astype(int)
+    return [int((s == v).sum()) for v in LIKERT_VALUES]
+
+
+def human_distribution_table(init, post):
+    """The numbers plotted in the human panel: one row per Likert value."""
+    return pd.DataFrame({
+        "likert_value": LIKERT_VALUES,
+        "likert_label": LIKERT_LABELS,
+        "human_post_stance_count": likert_counts(post),
+        "human_initial_stance_count": likert_counts(init),
+    })
+
+
 def draw_bars(ax, series, color, label):
-    s      = pd.to_numeric(series, errors="coerce").dropna().astype(int)
-    counts = [int((s == v).sum()) for v in LIKERT_VALUES]
+    counts = likert_counts(series)
     x      = np.arange(len(LIKERT_VALUES))
 
     ax.bar(x, counts, color=color, edgecolor="white", linewidth=0.4, width=0.7,
@@ -57,8 +72,7 @@ def draw_bars(ax, series, color, label):
 
 
 def draw_init_step(ax, series, color, label):
-    s      = pd.to_numeric(series, errors="coerce").dropna().astype(int)
-    counts = [int((s == v).sum()) for v in LIKERT_VALUES]
+    counts = likert_counts(series)
     edges  = np.arange(-0.5, len(LIKERT_VALUES) + 0.5)
     ax.stairs(counts, edges, color=color, lw=2.0, zorder=5, label=label)
 
@@ -128,6 +142,9 @@ def main():
                     dpi=300 if ext == '.png' else None,
                     bbox_inches='tight')
         print(f"Saved: figures/plots/distributions/human_distributions_nol{ext}")
+    human_distribution_table(init, post).to_csv(
+        "figures/plots/distributions/human_distributions_nol.csv", index=False)
+    print("Saved: figures/plots/distributions/human_distributions_nol.csv")
 
     # Add legend once for standalone version with consistent font size
     fig.legend(*ax.get_legend_handles_labels(),

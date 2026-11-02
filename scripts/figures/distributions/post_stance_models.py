@@ -72,15 +72,29 @@ def load_model(path):
     return pd.to_numeric(df["new_belief"], errors="coerce").dropna().astype(int)
 
 
+def likert_counts(series):
+    return [int((series == v).sum()) for v in LIKERT_VALUES]
+
+
+def model_panel_table(model_series, human_series):
+    """The numbers plotted in one model panel: model bars plus human outline."""
+    return pd.DataFrame({
+        "likert_value": LIKERT_VALUES,
+        "likert_label": LIKERT_LABELS,
+        "model_post_stance_count": likert_counts(model_series),
+        "human_post_stance_count": likert_counts(human_series),
+    })
+
+
 def draw_human_step(ax, series):
-    counts = [int((series == v).sum()) for v in LIKERT_VALUES]
+    counts = likert_counts(series)
     edges  = np.arange(-0.5, len(LIKERT_VALUES) + 0.5)
     ax.stairs(counts, edges, color=HUMAN_COLOR, lw=1.8, zorder=5, label="Human Post-Stance")
 
 
 def draw_bars(ax, series, color, title, show_ylabel=True, show_bar_labels=True):
     total  = len(series)
-    counts = [int((series == v).sum()) for v in LIKERT_VALUES]
+    counts = likert_counts(series)
     x      = np.arange(len(LIKERT_VALUES))
 
     bars = ax.bar(x, counts, color=color, edgecolor="white", linewidth=0.4, width=0.7, zorder=2, alpha=0.85)
@@ -250,7 +264,12 @@ def save_individual_panels(cache, human, model_order):
         # Save as PDF
         fig.savefig(f"{path}.pdf", dpi=300, bbox_inches='tight')
         print(f"  Saved panel_{slug}.pdf")
-        
+
+        table = model_panel_table(cache[key], human)
+        table.insert(0, "model", label)
+        table.to_csv(f"{path}.csv", index=False)
+        print(f"  Saved panel_{slug}.csv")
+
         plt.close(fig)
 
 

@@ -38,7 +38,8 @@ def test_split_composition():
     counts = {}
     for e in ex.REGISTRY:
         counts[e["split"]] = counts.get(e["split"], 0) + 1
-    assert counts == {"main": 6, "simulated_initial": 6, "ablations": 21}
+    # 6 post-training + 6 temperature + 11 prompt-component + 12 model-size
+    assert counts == {"main": 6, "simulated_initial": 6, "ablations": 35}
 
 
 def test_ablation_entries_are_all_typed():
@@ -61,8 +62,69 @@ def test_canonical_model_names_are_used():
     allowed = {ex.GPT52, ex.GPT5MINI, ex.GEMINI, ex.CLAUDE, ex.QWEN, ex.LLAMA} | {
         "OLMo-3-32B-Think", "OLMo-3-32B-Think-SFT", "OLMo-3-32B-Think-DPO",
         "OLMo-3.1-32B-Instruct", "OLMo-3.1-32B-Instruct-SFT", "OLMo-3.1-32B-Instruct-DPO",
-    }
+    } | {name for name, _ in ex.MODEL_SIZE_RUNS}
     assert {e["model"] for e in ex.REGISTRY} <= allowed
+
+
+def test_ablation_types_are_the_documented_four():
+    types = {e["ablation_type"] for e in ex.REGISTRY if e["split"] == "ablations"}
+    assert types == {"post_training", "temperature", "prompt_component", "model_size"}
+
+
+def test_model_size_sweep_has_twelve_runs_from_two_families():
+    runs = [e for e in ex.REGISTRY if e.get("ablation_type") == "model_size"]
+    assert len(runs) == 12
+    gemma = [e for e in runs if e["model"].startswith("gemma-4-")]
+    qwen = [e for e in runs if e["model"].startswith("Qwen3.5-")]
+    assert (len(gemma), len(qwen)) == (5, 7)
+
+
+def test_model_size_condition_is_the_size_label():
+    for e in ex.REGISTRY:
+        if e.get("ablation_type") == "model_size":
+            assert e["condition"] in e["model"]
+            assert e.get("temperature") is None
+
+
+def test_model_size_runs_match_the_sweep_configs():
+    """The registry must not drift from what slurm/submit_model.sh submits."""
+    config_dir = os.path.join(ex.ROOT, "configs", "model_size")
+    configured = {os.path.splitext(n)[0] for n in os.listdir(config_dir) if n.endswith(".json")}
+    assert {name for name, _ in ex.MODEL_SIZE_RUNS} == configured
+
+
+def test_no_reason_runs_are_exported_as_prompt_component():
+    runs = {e["model"]: e for e in ex.REGISTRY if e.get("condition") == "no-reason"}
+    assert set(runs) == {ex.LLAMA, ex.QWEN}
+    assert all(e["ablation_type"] == "prompt_component" for e in runs.values())
+
+
+def test_model_size_pilots_are_excluded_not_exported():
+    pilots = [p for p in ex.EXCLUDED if p.startswith("results/model_size/pilot/")]
+    assert len(pilots) == 7
+    assert not any("pilot" in e["path"] for e in ex.REGISTRY)
+
+
+def test_coverage_check_scans_the_model_size_folder(tmp_path, monkeypatch):
+    """An unregistered model-size run must fail the export, not vanish from it."""
+    for sub in ("ablations", "model_size", "model_size/pilot"):
+        (tmp_path / "results" / sub).mkdir(parents=True, exist_ok=True)
+    (tmp_path / "results" / "model_size" / "new-model_all_personas_results.xlsx").touch()
+    monkeypatch.setattr(ex, "ROOT", str(tmp_path))
+    monkeypatch.setattr(ex, "RESULTS", str(tmp_path / "results"))
+    monkeypatch.setattr(ex, "ABLATIONS", str(tmp_path / "results" / "ablations"))
+    monkeypatch.setattr(ex, "MODEL_SIZE", str(tmp_path / "results" / "model_size"))
+    monkeypatch.setattr(ex, "MODEL_SIZE_PILOT", str(tmp_path / "results" / "model_size" / "pilot"))
+    monkeypatch.setattr(ex, "REGISTRY", [])
+    monkeypatch.setattr(ex, "EXCLUDED", {})
+    with pytest.raises(RuntimeError, match="new-model_all_personas_results"):
+        ex.check_registry_covers_disk()
+
+
+def test_dataset_card_documents_the_new_ablations():
+    card = ex.dataset_card({"main": [1], "simulated_initial": [1], "ablations": [1]})
+    assert "`model_size`" in card
+    assert "`no-reason`" in card
 
 
 def test_same_six_models_in_main_and_simulated_initial():

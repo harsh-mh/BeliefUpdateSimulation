@@ -1,5 +1,5 @@
 ﻿"""
-Mean and SD of absolute belief change (|Î”|) for humans and 6 LLMs, by topic.
+Mean and SD of absolute belief change (|Δ|) for humans and 6 LLMs, by topic.
 Groups: Penalty Shootouts, UBI, Weight Loss Drugs, Overall.
 Run from: HumanSimulationProject/
 Output: figures/plots/absolute_belief_change_mean.png / .pdf / .eps
@@ -63,24 +63,66 @@ def normalize_llm(df):
     df.loc[mask, "init_belief"] *= -1
     return df
 
+POINT_COLUMNS = ["persona_id", "topic", "initial_belief", "new_belief", "abs_delta"]
+
+
 def load_human():
+    """One row per (persona, topic): normalized initial / final belief and |delta|."""
     df = pd.read_csv("results/merged_llm_participants_data_with_normalized_beliefs.csv")
-    df["abs_delta"] = (df["final_belief_normalized"] - df["initial_belief_normalized"]).abs()
-    return df[["topic", "abs_delta"]].dropna()
+    # The csv also holds the raw (un-normalized) initial_belief / final_belief,
+    # so pick the normalized columns before renaming them.
+    df = df[["persona_id", "topic", "initial_belief_normalized", "final_belief_normalized"]]
+    df = df.rename(columns={"initial_belief_normalized": "initial_belief",
+                            "final_belief_normalized": "new_belief"})
+    df["abs_delta"] = (df["new_belief"] - df["initial_belief"]).abs()
+    return df[POINT_COLUMNS].dropna(subset=["topic", "abs_delta"])
 
 def load_llm(path):
+    """One row per (persona, topic): normalized initial / new belief and |delta|."""
     df = pd.read_excel(path)
     df = normalize_llm(df)
-    df["abs_delta"] = (df["llm_new_belief"] - df["init_belief"]).abs()
-    return df[["topic", "abs_delta"]].dropna()
+    df = df.rename(columns={"init_belief": "initial_belief", "llm_new_belief": "new_belief"})
+    df["abs_delta"] = (df["new_belief"] - df["initial_belief"]).abs()
+    return df[POINT_COLUMNS].dropna(subset=["topic", "abs_delta"])
+
+
+def dot_range_points(frames):
+    """Every |delta| behind the dot-range panel's means and SDs.
+
+    One row per (source, persona, topic) response.
+    frames: list of (source label, DataFrame from load_human / load_llm).
+    """
+    cols = ["persona_id", "topic", "abs_delta"]
+    return pd.concat(
+        [df[cols].assign(source=label) for label, df in frames],
+        ignore_index=True,
+    )[["source"] + cols]
 
 def compute_stats(df):
+    """Returns {group: (mean, sd, n)} of |delta| per topic and overall."""
     stats = {}
     for topic in ["penalty", "UBI", "weight_loss"]:
         sub = df.loc[df["topic"] == topic, "abs_delta"]
-        stats[topic] = (sub.mean(), sub.std())
-    stats["overall"] = (df["abs_delta"].mean(), df["abs_delta"].std())
+        stats[topic] = (sub.mean(), sub.std(), len(sub))
+    stats["overall"] = (df["abs_delta"].mean(), df["abs_delta"].std(), len(df))
     return stats
+
+
+def dot_range_table(all_stats, group="overall"):
+    """The numbers plotted in the dot-range panel: mean dot and mean ± SD bar."""
+    rows = []
+    for label, _, stats in all_stats:
+        mean, sd, n = stats[group]
+        rows.append({
+            "source": label,
+            "group": group,
+            "n": n,
+            "mean_abs_delta": mean,
+            "sd_abs_delta": sd,
+            "range_low": mean - sd,
+            "range_high": mean + sd,
+        })
+    return pd.DataFrame(rows)
 
 def compute_percentile_stats(df, lo=25, hi=75):
     """Returns {topic: (median, lo_pct, hi_pct)} for each group."""
@@ -131,7 +173,7 @@ def draw_chart_with_errorbars(all_stats, out_stem):
 
     ax.set_xticks(x)
     ax.set_xticklabels(GROUP_LABELS, fontsize=11.25, rotation=15, ha='right')  # Increased from 9
-    ax.set_ylabel("Mean |Î”|", fontsize=14)  # Increased from 10
+    ax.set_ylabel("Mean |Δ|", fontsize=14)  # Increased from 10
     ax.yaxis.set_major_locator(mticker.MultipleLocator(0.2))
     max_value = max(
         stats[g][0] + stats[g][1]
@@ -166,7 +208,7 @@ def draw_line_with_bands(all_stats, out_stem):
     
     ax.set_xticks(x)
     ax.set_xticklabels(GROUP_LABELS, fontsize=11.25, rotation=15, ha='right')  # Increased from 9
-    ax.set_ylabel("Mean |Î”|", fontsize=14)  # Increased from 10
+    ax.set_ylabel("Mean |Δ|", fontsize=14)  # Increased from 10
     ax.yaxis.set_major_locator(mticker.MultipleLocator(0.2))
     ax.set_ylim(0, max(
         stats[g][0] + stats[g][1]
@@ -182,25 +224,25 @@ def draw_line_with_bands(all_stats, out_stem):
     plt.close()
 
 def draw_dot_range(all_stats, out_stem):
-    """Cleveland dot plot â€“ Overall only, single panel sized for 2-col display."""
+    """Cleveland dot plot – Overall only, single panel sized for 2-col display."""
     n_entities = len(all_stats)
     group       = "overall"
     group_label = "Overall"
 
-    # figsize matches 2-col display width (FIG_W/3 * 2 â‰ˆ 9.3") in combined figure
+    # figsize matches 2-col display width (FIG_W/3 * 2 ≈ 9.3") in combined figure
     fig, ax = plt.subplots(1, 1, figsize=(9.3, 2.8), constrained_layout=True)
 
     y_positions = np.arange(n_entities) * 0.4
 
-    raw_vals = [(stats[group][0], stats[group][1]) for _, _, stats in all_stats]
-    x_min = min(m - s for m, s in raw_vals)
-    x_max = max(m + s for m, s in raw_vals)
+    table = dot_range_table(all_stats, group)
+    x_min = table["range_low"].min()
+    x_max = table["range_high"].max()
     x_pad = (x_max - x_min) * 0.05
     x_min -= x_pad
     x_max += x_pad
 
-    for i, (label, color, stats) in enumerate(all_stats):
-        mean, std = stats[group]
+    for i, ((label, color, _), row) in enumerate(zip(all_stats, table.itertuples())):
+        mean, std = row.mean_abs_delta, row.sd_abs_delta
         y = y_positions[i]
         ax.plot([mean - std, mean + std], [y, y],
                 color=color, linewidth=3, solid_capstyle="round", zorder=2)
@@ -212,7 +254,7 @@ def draw_dot_range(all_stats, out_stem):
 
     ax.axvline(0, color="#cccccc", lw=0.5, zorder=1)
     ax.set_title(group_label, fontsize=13.75, fontweight="normal")  # Increased from 10
-    ax.set_xlabel("|Î”|", fontsize=14)  # Increased from 10
+    ax.set_xlabel("|Δ|", fontsize=14)  # Increased from 10
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(left=False, labelsize=11.25)  # Increased from 9
     ax.set_xlim(x_min, x_max)
@@ -228,6 +270,7 @@ def draw_dot_range(all_stats, out_stem):
             fig.savefig(f"{out_stem}_nol{ext}", format='svg', bbox_inches='tight')
         else:
             fig.savefig(f"{out_stem}_nol{ext}", dpi=300, bbox_inches='tight')
+    table.to_csv(f"{out_stem}_nol.csv", index=False)
 
     handles = [mpatches.Patch(color=color, label=label, linewidth=0)
                for label, color, _ in all_stats]
@@ -238,7 +281,7 @@ def draw_dot_range(all_stats, out_stem):
     plt.close()
 
 def draw_dot_range_percentile(all_stats, out_stem, lo=25, hi=75):
-    """Cleveland dot plot using median Â± percentile range instead of mean Â± SD."""
+    """Cleveland dot plot using median ± percentile range instead of mean ± SD."""
     n_entities = len(all_stats)
     group       = "overall"
     group_label = "Overall"
@@ -267,7 +310,7 @@ def draw_dot_range_percentile(all_stats, out_stem, lo=25, hi=75):
 
     ax.axvline(0, color="#cccccc", lw=0.5, zorder=1)
     ax.set_title(group_label, fontsize=13.75, fontweight="normal")
-    ax.set_xlabel(f"|Î”| (median, {lo}thâ€“{hi}th pct)", fontsize=14)
+    ax.set_xlabel(f"|Δ| (median, {lo}th–{hi}th pct)", fontsize=14)
     ax.spines[["top", "right", "left"]].set_visible(False)
     ax.tick_params(left=False, labelsize=11.25)
     ax.set_xlim(x_min, x_max)
@@ -294,14 +337,12 @@ def draw_dot_range_percentile(all_stats, out_stem, lo=25, hi=75):
 
 def main():
     print("Loading data...")
-    human_stats = compute_stats(load_human())
-    
-    # Build all_stats in the new order: Human first, then models in specified order
-    all_stats = [("Human", HUMAN_COLOR, human_stats)]
-    
+    # Order: Human first, then models in specified order
+    frames = [("Human", HUMAN_COLOR, load_human())]
     for label, path, color in MODELS_ORDERED[1:]:  # Skip the Human placeholder
         print(f"Processing {label}...")
-        all_stats.append((label, color, compute_stats(load_llm(path))))
+        frames.append((label, color, load_llm(path)))
+    all_stats = [(label, color, compute_stats(df)) for label, color, df in frames]
     
     print("Generating figures for Nature Communications with consistent font sizes...")
     print("Font sizes increased by 25% to match other plots")
@@ -313,6 +354,8 @@ def main():
                          "figures/plots/absolute_belief_change_line_bands")
     draw_dot_range(all_stats,
                    "figures/plots/absolute_belief_change_dot_range")
+    dot_range_points([(label, df) for label, _, df in frames]).to_csv(
+        "figures/plots/absolute_belief_change_dot_range_nol_points.csv", index=False)
 
     pct_stats = [("Human", HUMAN_COLOR, compute_percentile_stats(load_human()))]
     for label, path, color in MODELS_ORDERED[1:]:

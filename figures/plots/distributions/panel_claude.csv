@@ -1,0 +1,6 @@
+model,likert_value,likert_label,model_post_stance_count,human_post_stance_count
+Claude Opus 4.6,-2,SD,139,183
+Claude Opus 4.6,-1,D,273,298
+Claude Opus 4.6,0,N,278,181
+Claude Opus 4.6,1,A,306,317
+Claude Opus 4.6,2,SA,177,194

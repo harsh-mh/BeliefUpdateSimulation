@@ -4,7 +4,8 @@ Three splits:
   main              human responses + the six headline models
   simulated_initial the same six models, but seeded with a model-generated
                     initial belief instead of the participant's real one
-  ablations         post-training (OLMo), temperature, and prompt-component runs
+  ablations         post-training (OLMo), temperature, prompt-component, and
+                    model-size (Gemma 4, Qwen3.5) runs
 
 Every belief field is emitted twice: raw_* exactly as recorded against the
 statement as worded, and normalized_* flipped into the pro-topic frame (see
@@ -31,6 +32,8 @@ from belief_update_sim.response_parsing import repair_dataframe
 ROOT = str(PROJECT_ROOT)
 RESULTS = str(RESULTS_DIR)
 ABLATIONS = os.path.join(RESULTS, "ablations")
+MODEL_SIZE = os.path.join(RESULTS, "model_size")
+MODEL_SIZE_PILOT = os.path.join(MODEL_SIZE, "pilot")
 HUMAN_CSV = str(MERGED_HUMAN_CSV)
 
 # --- canonical model names -------------------------------------------------
@@ -51,6 +54,28 @@ def _r(name):
 
 def _a(name):
     return os.path.join(ABLATIONS, name)
+
+
+def _m(name):
+    return os.path.join(MODEL_SIZE, name)
+
+
+# Model-size sweep: (model name as published on the Hub, size label).
+# Smallest first within each family.
+MODEL_SIZE_RUNS = [
+    ("gemma-4-E2B-it", "E2B"),
+    ("gemma-4-E4B-it", "E4B"),
+    ("gemma-4-12B-it", "12B"),
+    ("gemma-4-26B-A4B-it", "26B-A4B"),
+    ("gemma-4-31B-it", "31B"),
+    ("Qwen3.5-0.8B", "0.8B"),
+    ("Qwen3.5-2B", "2B"),
+    ("Qwen3.5-4B", "4B"),
+    ("Qwen3.5-9B", "9B"),
+    ("Qwen3.5-27B", "27B"),
+    ("Qwen3.5-35B-A3B", "35B-A3B"),
+    ("Qwen3.5-122B-A10B", "122B-A10B"),
+]
 
 
 # --- file registry ---------------------------------------------------------
@@ -121,6 +146,18 @@ REGISTRY = [
          model=QWEN, ablation_type="prompt_component", condition="no-persona"),
     dict(path=_a("Qwen3-32B_no-personality.xlsx"), split="ablations",
          model=QWEN, ablation_type="prompt_component", condition="no-personality"),
+    # the model is not asked for a reason; `reasoning` is null by design
+    dict(path=_a("Llama-3.3-70B-Instruct_no-reason.xlsx"), split="ablations",
+         model=LLAMA, ablation_type="prompt_component", condition="no-reason"),
+    dict(path=_a("Qwen3-32B_no-reason.xlsx"), split="ablations",
+         model=QWEN, ablation_type="prompt_component", condition="no-reason"),
+
+    # ablations: model size --------------------------------------------------
+    # Two families served locally under identical settings, so parameter count
+    # is the only thing that varies. `condition` is the size label.
+    *[dict(path=_m(f"{name}_all_personas_results.xlsx"), split="ablations",
+           model=name, ablation_type="model_size", condition=size)
+      for name, size in MODEL_SIZE_RUNS],
 ]
 
 # Deliberately not published. Kept explicit so coverage checks stay exhaustive.
@@ -138,6 +175,10 @@ EXCLUDED = {
     "results/ablations/Qwen3-32B_all-positive.xlsx": "statement-framing ablation, out of scope",
     "results/template1_Qwen3_32B_all_personas_results.xlsx": "prompt-template variant, out of scope",
     "results/all_personas_results.xlsx": "smoke test: 30 rows, 5 personas, two models in one file",
+    # 3-persona pilots run before each full model-size job; superseded by it
+    **{f"results/model_size/pilot/{name}_pilot.xlsx": "model-size pilot, superseded by full run"
+       for name in ("gemma-4-E2B-it", "gemma-4-E4B-it", "gemma-4-12B-it",
+                    "Qwen3.5-0.8B", "Qwen3.5-2B", "Qwen3.5-4B", "Qwen3.5-9B")},
 }
 
 HUMAN_MODEL = "Human"
@@ -302,7 +343,9 @@ def hf_features():
 def check_registry_covers_disk():
     """Fail loudly if a results file is neither exported nor explicitly excluded."""
     on_disk = set()
-    for folder in (RESULTS, ABLATIONS):
+    for folder in (RESULTS, ABLATIONS, MODEL_SIZE, MODEL_SIZE_PILOT):
+        if not os.path.isdir(folder):
+            continue
         for name in os.listdir(folder):
             if name.endswith(".xlsx") and not name.startswith("~$"):
                 on_disk.add(os.path.relpath(os.path.join(folder, name), ROOT).replace("\\", "/"))
@@ -568,10 +611,31 @@ each participant's persona.
 |---|---|---|
 | `main` | {counts['main']} | human responses + {len(models)} models, each seeded with the participant's real initial belief |
 | `simulated_initial` | {counts['simulated_initial']} | the same models, seeded with a model-generated initial belief |
-| `ablations` | {counts['ablations']} | post-training (OLMo-3), temperature, and prompt-component runs |
+| `ablations` | {counts['ablations']} | post-training (OLMo-3), temperature, prompt-component, and model-size runs |
 
 Splits are disjoint. `source` is `human` or `llm`; `model` is `Human` on human
 rows.
+
+## Ablations
+
+`ablation_type` groups the runs in the `ablations` split, and `condition`
+names the variant within a group.
+
+| `ablation_type` | models | `condition` |
+|---|---|---|
+| `post_training` | OLMo-3-32B Think and OLMo-3.1-32B Instruct, each at its SFT, DPO and final checkpoint | checkpoint |
+| `temperature` | {GPT5MINI}, {LLAMA}, {QWEN} | `t0.0`, `t2.0` |
+| `prompt_component` | {GPT5MINI}, {LLAMA}, {QWEN} | `no-demographic`, `no-persona`, `no-personality`; `no-reason` for {LLAMA} and {QWEN} only |
+| `model_size` | Gemma 4 (E2B, E4B, 12B, 26B-A4B, 31B) and Qwen3.5 (0.8B, 2B, 4B, 9B, 27B, 35B-A3B, 122B-A10B) | size label |
+
+The `no-reason` runs omit the request for a justification from the prompt and
+are otherwise identical to the main runs, so `reasoning` is null there by
+design.
+
+The model-size runs were served locally with identical settings across all
+twelve models, so parameter count is the only thing that varies. The
+mixture-of-experts sizes give total and active parameters (`26B-A4B` is 26B
+total, 4B active), and Gemma's `E2B` and `E4B` are effective parameter counts.
 
 ## Belief sign convention
 
@@ -635,6 +699,10 @@ loudly.
   per-cell limit when it was written, and its trailing JSON is unrecoverable.
 - Temperature-2.0 runs have genuine parse failures (Llama 2.0%, Qwen 0.9%),
   left null rather than imputed.
+- The two smallest Qwen3.5 models often fail to produce a parsable answer,
+  even after recovery from `raw_response`: `new_belief` is null on 7.1% of
+  Qwen3.5-0.8B rows and 9.4% of Qwen3.5-2B rows. These are left null rather
+  than imputed. All other model-size runs are complete.
 - Gemini-3-Flash-Preview has one null response in `main`.
 
 ## Participant privacy
@@ -658,7 +726,8 @@ are quasi-identifiers, and the free text is participants' own writing.
 
 Probe-initial-belief runs (those beliefs also appear in `simulated_initial`),
 statement-framing ablations, the persona-extremity and prompt-template
-variants, and a 30-row smoke test. All remain in the source repository.
+variants, the three-persona pilots run before each model-size job, and a
+30-row smoke test. All remain in the source repository.
 
 The verbatim prompt sent to each model is also omitted — it is largely the same
 template repeated per row, and accounted for roughly a third of the total size.

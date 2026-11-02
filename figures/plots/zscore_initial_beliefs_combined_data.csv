@@ -1,0 +1,205 @@
+panel,source,predictor,stance,likert_value,likert_label,measure,value
+a,Human,Agreeableness,,,,z_value,1.0432
+a,Human,Employed part-time (vs Full time),,,,z_value,2.3532
+a,Human,Ethnicity Others (vs White),,,,z_value,0.2014
+a,Human,Familiarity,,,,z_value,2.6838
+a,Human,Initial Belief,,,,z_value,-14.6677
+a,Human,Master's degree (vs Bachelor's),,,,z_value,1.2114
+a,Human,No formal education (vs Bachelor's),,,,z_value,-0.5893
+a,Human,Not in labor force (vs Full time),,,,z_value,0.279
+a,Human,Penalty (vs UBI),,,,z_value,5.7606
+a,Human,Stance: Con (vs Pro),,,,z_value,-0.2374
+a,Human,Student Others (vs Not Student),,,,z_value,1.991
+a,Human,Weight Loss (vs UBI),,,,z_value,0.7393
+a,Llama-3.3-70B-Instruct,Agreeableness,,,,z_value,1.6338
+a,Llama-3.3-70B-Instruct,Employed part-time (vs Full time),,,,z_value,-0.0335
+a,Llama-3.3-70B-Instruct,Ethnicity Others (vs White),,,,z_value,2.6093
+a,Llama-3.3-70B-Instruct,Familiarity,,,,z_value,0.6008
+a,Llama-3.3-70B-Instruct,Initial Belief,,,,z_value,-19.8217
+a,Llama-3.3-70B-Instruct,Master's degree (vs Bachelor's),,,,z_value,1.0506
+a,Llama-3.3-70B-Instruct,No formal education (vs Bachelor's),,,,z_value,-0.3759
+a,Llama-3.3-70B-Instruct,Not in labor force (vs Full time),,,,z_value,-2.6341
+a,Llama-3.3-70B-Instruct,Penalty (vs UBI),,,,z_value,0.8122
+a,Llama-3.3-70B-Instruct,Stance: Con (vs Pro),,,,z_value,1.0169
+a,Llama-3.3-70B-Instruct,Student Others (vs Not Student),,,,z_value,-2.1143
+a,Llama-3.3-70B-Instruct,Weight Loss (vs UBI),,,,z_value,-0.8204
+a,Qwen3-32B,Agreeableness,,,,z_value,3.7971
+a,Qwen3-32B,Employed part-time (vs Full time),,,,z_value,-0.5982
+a,Qwen3-32B,Ethnicity Others (vs White),,,,z_value,1.2992
+a,Qwen3-32B,Familiarity,,,,z_value,0.2693
+a,Qwen3-32B,Initial Belief,,,,z_value,-19.0895
+a,Qwen3-32B,Master's degree (vs Bachelor's),,,,z_value,0.4782
+a,Qwen3-32B,No formal education (vs Bachelor's),,,,z_value,-0.6036
+a,Qwen3-32B,Not in labor force (vs Full time),,,,z_value,-1.9249
+a,Qwen3-32B,Penalty (vs UBI),,,,z_value,10.1212
+a,Qwen3-32B,Stance: Con (vs Pro),,,,z_value,-0.3918
+a,Qwen3-32B,Student Others (vs Not Student),,,,z_value,-1.815
+a,Qwen3-32B,Weight Loss (vs UBI),,,,z_value,6.4523
+a,GPT-5.2,Agreeableness,,,,z_value,1.1472
+a,GPT-5.2,Employed part-time (vs Full time),,,,z_value,1.2084
+a,GPT-5.2,Ethnicity Others (vs White),,,,z_value,2.5599
+a,GPT-5.2,Familiarity,,,,z_value,2.2397
+a,GPT-5.2,Initial Belief,,,,z_value,-22.7144
+a,GPT-5.2,Master's degree (vs Bachelor's),,,,z_value,2.4259
+a,GPT-5.2,No formal education (vs Bachelor's),,,,z_value,-2.2815
+a,GPT-5.2,Not in labor force (vs Full time),,,,z_value,-1.4903
+a,GPT-5.2,Penalty (vs UBI),,,,z_value,9.4944
+a,GPT-5.2,Stance: Con (vs Pro),,,,z_value,-1.3261
+a,GPT-5.2,Student Others (vs Not Student),,,,z_value,-0.0984
+a,GPT-5.2,Weight Loss (vs UBI),,,,z_value,11.5669
+a,GPT-5-mini,Agreeableness,,,,z_value,3.4051
+a,GPT-5-mini,Employed part-time (vs Full time),,,,z_value,0.8377
+a,GPT-5-mini,Ethnicity Others (vs White),,,,z_value,1.0839
+a,GPT-5-mini,Familiarity,,,,z_value,1.1666
+a,GPT-5-mini,Initial Belief,,,,z_value,-11.4849
+a,GPT-5-mini,Master's degree (vs Bachelor's),,,,z_value,1.4126
+a,GPT-5-mini,No formal education (vs Bachelor's),,,,z_value,-1.6564
+a,GPT-5-mini,Not in labor force (vs Full time),,,,z_value,-2.2993
+a,GPT-5-mini,Penalty (vs UBI),,,,z_value,9.2363
+a,GPT-5-mini,Stance: Con (vs Pro),,,,z_value,2.9525
+a,GPT-5-mini,Student Others (vs Not Student),,,,z_value,-0.8337
+a,GPT-5-mini,Weight Loss (vs UBI),,,,z_value,9.3317
+a,Gemini-3-flash-preview,Agreeableness,,,,z_value,1.3419
+a,Gemini-3-flash-preview,Employed part-time (vs Full time),,,,z_value,-0.286
+a,Gemini-3-flash-preview,Ethnicity Others (vs White),,,,z_value,2.5904
+a,Gemini-3-flash-preview,Familiarity,,,,z_value,1.2896
+a,Gemini-3-flash-preview,Initial Belief,,,,z_value,-8.1988
+a,Gemini-3-flash-preview,Master's degree (vs Bachelor's),,,,z_value,0.7268
+a,Gemini-3-flash-preview,No formal education (vs Bachelor's),,,,z_value,-0.4325
+a,Gemini-3-flash-preview,Not in labor force (vs Full time),,,,z_value,-1.6135
+a,Gemini-3-flash-preview,Penalty (vs UBI),,,,z_value,6.5686
+a,Gemini-3-flash-preview,Stance: Con (vs Pro),,,,z_value,8.2771
+a,Gemini-3-flash-preview,Student Others (vs Not Student),,,,z_value,-0.9243
+a,Gemini-3-flash-preview,Weight Loss (vs UBI),,,,z_value,4.62
+a,Claude-opus-4-6,Agreeableness,,,,z_value,2.6098
+a,Claude-opus-4-6,Employed part-time (vs Full time),,,,z_value,0.9321
+a,Claude-opus-4-6,Ethnicity Others (vs White),,,,z_value,1.8521
+a,Claude-opus-4-6,Familiarity,,,,z_value,1.8472
+a,Claude-opus-4-6,Initial Belief,,,,z_value,-13.5506
+a,Claude-opus-4-6,Master's degree (vs Bachelor's),,,,z_value,1.6324
+a,Claude-opus-4-6,No formal education (vs Bachelor's),,,,z_value,-1.2707
+a,Claude-opus-4-6,Not in labor force (vs Full time),,,,z_value,-1.739
+a,Claude-opus-4-6,Penalty (vs UBI),,,,z_value,4.2471
+a,Claude-opus-4-6,Stance: Con (vs Pro),,,,z_value,4.308
+a,Claude-opus-4-6,Student Others (vs Not Student),,,,z_value,-0.8657
+a,Claude-opus-4-6,Weight Loss (vs UBI),,,,z_value,6.7402
+b,GPT-5.2,,initial,-2,SD,count,0.0
+b,GPT-5.2,,initial,-1,D,count,289.0
+b,GPT-5.2,,initial,0,N,count,567.0
+b,GPT-5.2,,initial,1,A,count,317.0
+b,GPT-5.2,,initial,2,SA,count,0.0
+b,Human,,initial,-2,SD,count,175.0
+b,Human,,initial,-1,D,count,251.0
+b,Human,,initial,0,N,count,199.0
+b,Human,,initial,1,A,count,316.0
+b,Human,,initial,2,SA,count,232.0
+c,GPT-5.2,,post,-2,SD,count,20.0
+c,GPT-5.2,,post,-1,D,count,421.0
+c,GPT-5.2,,post,0,N,count,420.0
+c,GPT-5.2,,post,1,A,count,293.0
+c,GPT-5.2,,post,2,SA,count,19.0
+c,Human,,post,-2,SD,count,183.0
+c,Human,,post,-1,D,count,298.0
+c,Human,,post,0,N,count,181.0
+c,Human,,post,1,A,count,317.0
+c,Human,,post,2,SA,count,194.0
+d,GPT-5-mini,,initial,-2,SD,count,31.0
+d,GPT-5-mini,,initial,-1,D,count,525.0
+d,GPT-5-mini,,initial,0,N,count,193.0
+d,GPT-5-mini,,initial,1,A,count,419.0
+d,GPT-5-mini,,initial,2,SA,count,5.0
+d,Human,,initial,-2,SD,count,175.0
+d,Human,,initial,-1,D,count,251.0
+d,Human,,initial,0,N,count,199.0
+d,Human,,initial,1,A,count,316.0
+d,Human,,initial,2,SA,count,232.0
+e,GPT-5-mini,,post,-2,SD,count,315.0
+e,GPT-5-mini,,post,-1,D,count,162.0
+e,GPT-5-mini,,post,0,N,count,391.0
+e,GPT-5-mini,,post,1,A,count,191.0
+e,GPT-5-mini,,post,2,SA,count,114.0
+e,Human,,post,-2,SD,count,183.0
+e,Human,,post,-1,D,count,298.0
+e,Human,,post,0,N,count,181.0
+e,Human,,post,1,A,count,317.0
+e,Human,,post,2,SA,count,194.0
+f,Gemini-3-flash,,initial,-2,SD,count,1.0
+f,Gemini-3-flash,,initial,-1,D,count,435.0
+f,Gemini-3-flash,,initial,0,N,count,378.0
+f,Gemini-3-flash,,initial,1,A,count,351.0
+f,Gemini-3-flash,,initial,2,SA,count,8.0
+f,Human,,initial,-2,SD,count,175.0
+f,Human,,initial,-1,D,count,251.0
+f,Human,,initial,0,N,count,199.0
+f,Human,,initial,1,A,count,316.0
+f,Human,,initial,2,SA,count,232.0
+g,Gemini-3-flash,,post,-2,SD,count,140.0
+g,Gemini-3-flash,,post,-1,D,count,410.0
+g,Gemini-3-flash,,post,0,N,count,179.0
+g,Gemini-3-flash,,post,1,A,count,398.0
+g,Gemini-3-flash,,post,2,SA,count,46.0
+g,Human,,post,-2,SD,count,183.0
+g,Human,,post,-1,D,count,298.0
+g,Human,,post,0,N,count,181.0
+g,Human,,post,1,A,count,317.0
+g,Human,,post,2,SA,count,194.0
+h,Claude Opus 4.6,,initial,-2,SD,count,0.0
+h,Claude Opus 4.6,,initial,-1,D,count,203.0
+h,Claude Opus 4.6,,initial,0,N,count,756.0
+h,Claude Opus 4.6,,initial,1,A,count,212.0
+h,Claude Opus 4.6,,initial,2,SA,count,2.0
+h,Human,,initial,-2,SD,count,175.0
+h,Human,,initial,-1,D,count,251.0
+h,Human,,initial,0,N,count,199.0
+h,Human,,initial,1,A,count,316.0
+h,Human,,initial,2,SA,count,232.0
+i,Claude Opus 4.6,,post,-2,SD,count,24.0
+i,Claude Opus 4.6,,post,-1,D,count,432.0
+i,Claude Opus 4.6,,post,0,N,count,309.0
+i,Claude Opus 4.6,,post,1,A,count,384.0
+i,Claude Opus 4.6,,post,2,SA,count,24.0
+i,Human,,post,-2,SD,count,183.0
+i,Human,,post,-1,D,count,298.0
+i,Human,,post,0,N,count,181.0
+i,Human,,post,1,A,count,317.0
+i,Human,,post,2,SA,count,194.0
+j,Qwen3-32B,,initial,-2,SD,count,10.0
+j,Qwen3-32B,,initial,-1,D,count,424.0
+j,Qwen3-32B,,initial,0,N,count,351.0
+j,Qwen3-32B,,initial,1,A,count,379.0
+j,Qwen3-32B,,initial,2,SA,count,9.0
+j,Human,,initial,-2,SD,count,175.0
+j,Human,,initial,-1,D,count,251.0
+j,Human,,initial,0,N,count,199.0
+j,Human,,initial,1,A,count,316.0
+j,Human,,initial,2,SA,count,232.0
+k,Qwen3-32B,,post,-2,SD,count,71.0
+k,Qwen3-32B,,post,-1,D,count,411.0
+k,Qwen3-32B,,post,0,N,count,361.0
+k,Qwen3-32B,,post,1,A,count,300.0
+k,Qwen3-32B,,post,2,SA,count,30.0
+k,Human,,post,-2,SD,count,183.0
+k,Human,,post,-1,D,count,298.0
+k,Human,,post,0,N,count,181.0
+k,Human,,post,1,A,count,317.0
+k,Human,,post,2,SA,count,194.0
+l,Llama-3.3-70B-Instruct,,initial,-2,SD,count,0.0
+l,Llama-3.3-70B-Instruct,,initial,-1,D,count,455.0
+l,Llama-3.3-70B-Instruct,,initial,0,N,count,408.0
+l,Llama-3.3-70B-Instruct,,initial,1,A,count,293.0
+l,Llama-3.3-70B-Instruct,,initial,2,SA,count,0.0
+l,Human,,initial,-2,SD,count,175.0
+l,Human,,initial,-1,D,count,251.0
+l,Human,,initial,0,N,count,199.0
+l,Human,,initial,1,A,count,316.0
+l,Human,,initial,2,SA,count,232.0
+m,Llama-3.3-70B-Instruct,,post,-2,SD,count,188.0
+m,Llama-3.3-70B-Instruct,,post,-1,D,count,312.0
+m,Llama-3.3-70B-Instruct,,post,0,N,count,392.0
+m,Llama-3.3-70B-Instruct,,post,1,A,count,218.0
+m,Llama-3.3-70B-Instruct,,post,2,SA,count,63.0
+m,Human,,post,-2,SD,count,183.0
+m,Human,,post,-1,D,count,298.0
+m,Human,,post,0,N,count,181.0
+m,Human,,post,1,A,count,317.0
+m,Human,,post,2,SA,count,194.0
